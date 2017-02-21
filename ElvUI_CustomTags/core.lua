@@ -3,6 +3,9 @@ local E = unpack(ElvUI);
 local ElvUF = ElvUI.oUF
 assert(ElvUF, "ElvUI was unable to locate oUF.")
 
+local AddOnName = ...
+LibStub("LibElvUIPlugin-1.0"):RegisterPlugin(AddOnName)
+
 --Cache global variables
 --Lua functions
 local _G = _G
