@@ -119,11 +119,8 @@ local function GetFormattedText(min, max, style, noDecimal)
 	end
 end
 
---[[
-	Add custom tags below this block
---]]
-ElvUF.TagEvents["num:targeting"] = "UNIT_TARGET PLAYER_TARGET_CHANGED RAID_ROSTER_UPDATE"
-ElvUF.Tags["num:targeting"] = function(unit)
+ElvUF.Tags.Events["num:targeting"] = "UNIT_TARGET PLAYER_TARGET_CHANGED RAID_ROSTER_UPDATE"
+ElvUF.Tags.Methods["num:targeting"] = function(unit)
 	if not IsInGroup() then return "" end
 	local targetedByNum = 0
 
@@ -143,8 +140,8 @@ ElvUF.Tags["num:targeting"] = function(unit)
 	return (targetedByNum > 0 and targetedByNum or "")
 end
 
-ElvUF.TagEvents["health:percent:hidefull"] = "UNIT_HEALTH UNIT_MAXHEALTH UNIT_CONNECTION"
-ElvUF.Tags["health:percent:hidefull"] = function(unit)
+ElvUF.Tags.Events["health:percent:hidefull"] = "UNIT_HEALTH UNIT_MAXHEALTH UNIT_CONNECTION"
+ElvUF.Tags.Methods["health:percent:hidefull"] = function(unit)
 	local min, max = UnitHealth(unit), UnitHealthMax(unit)
 	local deficit = max - min
 	local String
@@ -158,8 +155,8 @@ ElvUF.Tags["health:percent:hidefull"] = function(unit)
 	return String
 end
 
-ElvUF.TagEvents["health:current:hidefull"] = "UNIT_HEALTH UNIT_MAXHEALTH"
-ElvUF.Tags["health:current:hidefull"] = function(unit)
+ElvUF.Tags.Events["health:current:hidefull"] = "UNIT_HEALTH UNIT_MAXHEALTH"
+ElvUF.Tags.Methods["health:current:hidefull"] = function(unit)
 	local min, max = UnitHealth(unit), UnitHealthMax(unit)
 	local deficit = max - min
 	local String
@@ -173,8 +170,8 @@ ElvUF.Tags["health:current:hidefull"] = function(unit)
 	return String
 end
 
-ElvUF.TagEvents["health:current-percent:hidefull"] = "UNIT_HEALTH UNIT_MAXHEALTH"
-ElvUF.Tags["health:current-percent:hidefull"] = function(unit)
+ElvUF.Tags.Events["health:current-percent:hidefull"] = "UNIT_HEALTH UNIT_MAXHEALTH"
+ElvUF.Tags.Methods["health:current-percent:hidefull"] = function(unit)
 	local min, max = UnitHealth(unit), UnitHealthMax(unit)
 	local deficit = max - min
 	local String
@@ -188,8 +185,8 @@ ElvUF.Tags["health:current-percent:hidefull"] = function(unit)
 	return String
 end
 
-ElvUF.TagEvents["health:percent:hidedead"] = "UNIT_HEALTH UNIT_MAXHEALTH UNIT_CONNECTION"
-ElvUF.Tags["health:percent:hidedead"] = function(unit)
+ElvUF.Tags.Events["health:percent:hidedead"] = "UNIT_HEALTH UNIT_MAXHEALTH UNIT_CONNECTION"
+ElvUF.Tags.Methods["health:percent:hidedead"] = function(unit)
 	local min, max = UnitHealth(unit), UnitHealthMax(unit)
 	local deficit = max - min
 	local String
@@ -203,8 +200,8 @@ ElvUF.Tags["health:percent:hidedead"] = function(unit)
 	return String
 end
 
-ElvUF.TagEvents["health:current:hidedead"] = "UNIT_HEALTH UNIT_MAXHEALTH"
-ElvUF.Tags["health:current:hidedead"] = function(unit)
+ElvUF.Tags.Events["health:current:hidedead"] = "UNIT_HEALTH UNIT_MAXHEALTH"
+ElvUF.Tags.Methods["health:current:hidedead"] = function(unit)
 	local min, max = UnitHealth(unit), UnitHealthMax(unit)
 	local deficit = max - min
 	local String
@@ -218,8 +215,8 @@ ElvUF.Tags["health:current:hidedead"] = function(unit)
 	return String
 end
 
-ElvUF.TagEvents["health:current-percent:hidedead"] = "UNIT_HEALTH UNIT_MAXHEALTH"
-ElvUF.Tags["health:current-percent:hidedead"] = function(unit)
+ElvUF.Tags.Events["health:current-percent:hidedead"] = "UNIT_HEALTH UNIT_MAXHEALTH"
+ElvUF.Tags.Methods["health:current-percent:hidedead"] = function(unit)
 	local min, max = UnitHealth(unit), UnitHealthMax(unit)
 	local deficit = max - min
 	local String
@@ -233,8 +230,8 @@ ElvUF.Tags["health:current-percent:hidedead"] = function(unit)
 	return String
 end
 
-ElvUF.TagEvents["health:percent:hidefull:hidedead"] = "UNIT_HEALTH UNIT_MAXHEALTH UNIT_CONNECTION"
-ElvUF.Tags["health:percent:hidefull:hidedead"] = function(unit)
+ElvUF.Tags.Events["health:percent:hidefull:hidedead"] = "UNIT_HEALTH UNIT_MAXHEALTH UNIT_CONNECTION"
+ElvUF.Tags.Methods["health:percent:hidefull:hidedead"] = function(unit)
 	local min, max = UnitHealth(unit), UnitHealthMax(unit)
 	local deficit = max - min
 	local String
@@ -248,8 +245,8 @@ ElvUF.Tags["health:percent:hidefull:hidedead"] = function(unit)
 	return String
 end
 
-ElvUF.TagEvents["health:current:hidefull:hidedead"] = "UNIT_HEALTH UNIT_MAXHEALTH"
-ElvUF.Tags["health:current:hidefull:hidedead"] = function(unit)
+ElvUF.Tags.Events["health:current:hidefull:hidedead"] = "UNIT_HEALTH UNIT_MAXHEALTH"
+ElvUF.Tags.Methods["health:current:hidefull:hidedead"] = function(unit)
 	local min, max = UnitHealth(unit), UnitHealthMax(unit)
 	local deficit = max - min
 	local String
@@ -263,8 +260,8 @@ ElvUF.Tags["health:current:hidefull:hidedead"] = function(unit)
 	return String
 end
 
-ElvUF.TagEvents["health:current-percent:hidefull:hidedead"] = "UNIT_HEALTH UNIT_MAXHEALTH"
-ElvUF.Tags["health:current-percent:hidefull:hidedead"] = function(unit)
+ElvUF.Tags.Events["health:current-percent:hidefull:hidedead"] = "UNIT_HEALTH UNIT_MAXHEALTH"
+ElvUF.Tags.Methods["health:current-percent:hidefull:hidedead"] = function(unit)
 	local min, max = UnitHealth(unit), UnitHealthMax(unit)
 	local deficit = max - min
 	local String
@@ -278,8 +275,8 @@ ElvUF.Tags["health:current-percent:hidefull:hidedead"] = function(unit)
 	return String
 end
 
-ElvUF.TagEvents["power:percent:hidefull"] = "UNIT_MAXENERGY UNIT_MAXFOCUS UNIT_MAXMANA UNIT_MAXRAGE UNIT_ENERGY UNIT_FOCUS UNIT_MANA UNIT_RAGE UNIT_MAXRUNIC_POWER UNIT_RUNIC_POWER"
-ElvUF.Tags["power:percent:hidefull"] = function(unit)
+ElvUF.Tags.Events["power:percent:hidefull"] = "UNIT_MAXENERGY UNIT_MAXFOCUS UNIT_MAXMANA UNIT_MAXRAGE UNIT_ENERGY UNIT_FOCUS UNIT_MANA UNIT_RAGE UNIT_MAXRUNIC_POWER UNIT_RUNIC_POWER"
+ElvUF.Tags.Methods["power:percent:hidefull"] = function(unit)
 	local pType = UnitPowerType(unit)
 	local min, max = UnitPower(unit, pType), UnitPowerMax(unit, pType)
 	local deficit = max - min
@@ -294,8 +291,8 @@ ElvUF.Tags["power:percent:hidefull"] = function(unit)
 	return String
 end
 
-ElvUF.TagEvents["power:current:hidefull"] = "UNIT_MAXENERGY UNIT_MAXFOCUS UNIT_MAXMANA UNIT_MAXRAGE UNIT_ENERGY UNIT_FOCUS UNIT_MANA UNIT_RAGE UNIT_MAXRUNIC_POWER UNIT_RUNIC_POWER"
-ElvUF.Tags["power:current:hidefull"] = function(unit)
+ElvUF.Tags.Events["power:current:hidefull"] = "UNIT_MAXENERGY UNIT_MAXFOCUS UNIT_MAXMANA UNIT_MAXRAGE UNIT_ENERGY UNIT_FOCUS UNIT_MANA UNIT_RAGE UNIT_MAXRUNIC_POWER UNIT_RUNIC_POWER"
+ElvUF.Tags.Methods["power:current:hidefull"] = function(unit)
 	local pType = UnitPowerType(unit)
 	local min, max = UnitPower(unit, pType), UnitPowerMax(unit, pType)
 	local deficit = max - min
@@ -310,8 +307,8 @@ ElvUF.Tags["power:current:hidefull"] = function(unit)
 	return String
 end
 
-ElvUF.TagEvents["power:current-percent:hidefull"] = "UNIT_MAXENERGY UNIT_MAXFOCUS UNIT_MAXMANA UNIT_MAXRAGE UNIT_ENERGY UNIT_FOCUS UNIT_MANA UNIT_RAGE UNIT_MAXRUNIC_POWER UNIT_RUNIC_POWER"
-ElvUF.Tags["power:current-percent:hidefull"] = function(unit)
+ElvUF.Tags.Events["power:current-percent:hidefull"] = "UNIT_MAXENERGY UNIT_MAXFOCUS UNIT_MAXMANA UNIT_MAXRAGE UNIT_ENERGY UNIT_FOCUS UNIT_MANA UNIT_RAGE UNIT_MAXRUNIC_POWER UNIT_RUNIC_POWER"
+ElvUF.Tags.Methods["power:current-percent:hidefull"] = function(unit)
 	local pType = UnitPowerType(unit)
 	local min, max = UnitPower(unit, pType), UnitPowerMax(unit, pType)
 	local deficit = max - min
@@ -326,8 +323,8 @@ ElvUF.Tags["power:current-percent:hidefull"] = function(unit)
 	return String
 end
 
-ElvUF.TagEvents["power:percent:hidezero"] = "UNIT_MAXENERGY UNIT_MAXFOCUS UNIT_MAXMANA UNIT_MAXRAGE UNIT_ENERGY UNIT_FOCUS UNIT_MANA UNIT_RAGE UNIT_MAXRUNIC_POWER UNIT_RUNIC_POWER"
-ElvUF.Tags["power:percent:hidezero"] = function(unit)
+ElvUF.Tags.Events["power:percent:hidezero"] = "UNIT_MAXENERGY UNIT_MAXFOCUS UNIT_MAXMANA UNIT_MAXRAGE UNIT_ENERGY UNIT_FOCUS UNIT_MANA UNIT_RAGE UNIT_MAXRUNIC_POWER UNIT_RUNIC_POWER"
+ElvUF.Tags.Methods["power:percent:hidezero"] = function(unit)
 	local pType = UnitPowerType(unit)
 	local min, max = UnitPower(unit, pType), UnitPowerMax(unit, pType)
 	local String
@@ -341,8 +338,8 @@ ElvUF.Tags["power:percent:hidezero"] = function(unit)
 	return String
 end
 
-ElvUF.TagEvents["power:current:hidezero"] = "UNIT_MAXENERGY UNIT_MAXFOCUS UNIT_MAXMANA UNIT_MAXRAGE UNIT_ENERGY UNIT_FOCUS UNIT_MANA UNIT_RAGE UNIT_MAXRUNIC_POWER UNIT_RUNIC_POWER"
-ElvUF.Tags["power:current:hidezero"] = function(unit)
+ElvUF.Tags.Events["power:current:hidezero"] = "UNIT_MAXENERGY UNIT_MAXFOCUS UNIT_MAXMANA UNIT_MAXRAGE UNIT_ENERGY UNIT_FOCUS UNIT_MANA UNIT_RAGE UNIT_MAXRUNIC_POWER UNIT_RUNIC_POWER"
+ElvUF.Tags.Methods["power:current:hidezero"] = function(unit)
 	local pType = UnitPowerType(unit)
 	local min, max = UnitPower(unit, pType), UnitPowerMax(unit, pType)
 	local String
@@ -356,8 +353,8 @@ ElvUF.Tags["power:current:hidezero"] = function(unit)
 	return String
 end
 
-ElvUF.TagEvents["power:current-percent:hidezero"] = "UNIT_MAXENERGY UNIT_MAXFOCUS UNIT_MAXMANA UNIT_MAXRAGE UNIT_ENERGY UNIT_FOCUS UNIT_MANA UNIT_RAGE UNIT_MAXRUNIC_POWER UNIT_RUNIC_POWER"
-ElvUF.Tags["power:current-percent:hidezero"] = function(unit)
+ElvUF.Tags.Events["power:current-percent:hidezero"] = "UNIT_MAXENERGY UNIT_MAXFOCUS UNIT_MAXMANA UNIT_MAXRAGE UNIT_ENERGY UNIT_FOCUS UNIT_MANA UNIT_RAGE UNIT_MAXRUNIC_POWER UNIT_RUNIC_POWER"
+ElvUF.Tags.Methods["power:current-percent:hidezero"] = function(unit)
 	local pType = UnitPowerType(unit)
 	local min, max = UnitPower(unit, pType), UnitPowerMax(unit, pType)
 	local String
@@ -371,8 +368,8 @@ ElvUF.Tags["power:current-percent:hidezero"] = function(unit)
 	return String
 end
 
-ElvUF.TagEvents["power:percent:hidefull:hidezero"] = "UNIT_MAXENERGY UNIT_MAXFOCUS UNIT_MAXMANA UNIT_MAXRAGE UNIT_ENERGY UNIT_FOCUS UNIT_MANA UNIT_RAGE UNIT_MAXRUNIC_POWER UNIT_RUNIC_POWER"
-ElvUF.Tags["power:percent:hidefull:hidezero"] = function(unit)
+ElvUF.Tags.Events["power:percent:hidefull:hidezero"] = "UNIT_MAXENERGY UNIT_MAXFOCUS UNIT_MAXMANA UNIT_MAXRAGE UNIT_ENERGY UNIT_FOCUS UNIT_MANA UNIT_RAGE UNIT_MAXRUNIC_POWER UNIT_RUNIC_POWER"
+ElvUF.Tags.Methods["power:percent:hidefull:hidezero"] = function(unit)
 	local pType = UnitPowerType(unit)
 	local min, max = UnitPower(unit, pType), UnitPowerMax(unit, pType)
 	local deficit = max - min
@@ -387,8 +384,8 @@ ElvUF.Tags["power:percent:hidefull:hidezero"] = function(unit)
 	return String
 end
 
-ElvUF.TagEvents["power:current:hidefull:hidezero"] = "UNIT_MAXENERGY UNIT_MAXFOCUS UNIT_MAXMANA UNIT_MAXRAGE UNIT_ENERGY UNIT_FOCUS UNIT_MANA UNIT_RAGE UNIT_MAXRUNIC_POWER UNIT_RUNIC_POWER"
-ElvUF.Tags["power:current:hidefull:hidezero"] = function(unit)
+ElvUF.Tags.Events["power:current:hidefull:hidezero"] = "UNIT_MAXENERGY UNIT_MAXFOCUS UNIT_MAXMANA UNIT_MAXRAGE UNIT_ENERGY UNIT_FOCUS UNIT_MANA UNIT_RAGE UNIT_MAXRUNIC_POWER UNIT_RUNIC_POWER"
+ElvUF.Tags.Methods["power:current:hidefull:hidezero"] = function(unit)
 	local pType = UnitPowerType(unit)
 	local min, max = UnitPower(unit, pType), UnitPowerMax(unit, pType)
 	local deficit = max - min
@@ -403,8 +400,8 @@ ElvUF.Tags["power:current:hidefull:hidezero"] = function(unit)
 	return String
 end
 
-ElvUF.TagEvents["power:current-percent:hidefull:hidezero"] = "UNIT_MAXENERGY UNIT_MAXFOCUS UNIT_MAXMANA UNIT_MAXRAGE UNIT_ENERGY UNIT_FOCUS UNIT_MANA UNIT_RAGE UNIT_MAXRUNIC_POWER UNIT_RUNIC_POWER"
-ElvUF.Tags["power:current-percent:hidefull:hidezero"] = function(unit)
+ElvUF.Tags.Events["power:current-percent:hidefull:hidezero"] = "UNIT_MAXENERGY UNIT_MAXFOCUS UNIT_MAXMANA UNIT_MAXRAGE UNIT_ENERGY UNIT_FOCUS UNIT_MANA UNIT_RAGE UNIT_MAXRUNIC_POWER UNIT_RUNIC_POWER"
+ElvUF.Tags.Methods["power:current-percent:hidefull:hidezero"] = function(unit)
 	local pType = UnitPowerType(unit)
 	local min, max = UnitPower(unit, pType), UnitPowerMax(unit, pType)
 	local deficit = max - min
@@ -419,8 +416,8 @@ ElvUF.Tags["power:current-percent:hidefull:hidezero"] = function(unit)
 	return String
 end
 
-ElvUF.TagEvents["power:percent:hidedead"] = "UNIT_DISPLAYPOWER UNIT_POWER_FREQUENT UNIT_MAXPOWER UNIT_HEALTH"
-ElvUF.Tags["power:percent:hidedead"] = function(unit)
+ElvUF.Tags.Events["power:percent:hidedead"] = "UNIT_DISPLAYPOWER UNIT_POWER_FREQUENT UNIT_MAXPOWER UNIT_HEALTH"
+ElvUF.Tags.Methods["power:percent:hidedead"] = function(unit)
 	local pType = UnitPowerType(unit)
 	local min, max = UnitPower(unit, pType), UnitPowerMax(unit, pType)
 	local deficit = max - min
@@ -435,8 +432,8 @@ ElvUF.Tags["power:percent:hidedead"] = function(unit)
 	return String
 end
 
-ElvUF.TagEvents["power:current:hidedead"] = "UNIT_DISPLAYPOWER UNIT_POWER_FREQUENT UNIT_MAXPOWER UNIT_HEALTH"
-ElvUF.Tags["power:current:hidedead"] = function(unit)
+ElvUF.Tags.Events["power:current:hidedead"] = "UNIT_DISPLAYPOWER UNIT_POWER_FREQUENT UNIT_MAXPOWER UNIT_HEALTH"
+ElvUF.Tags.Methods["power:current:hidedead"] = function(unit)
 	local pType = UnitPowerType(unit)
 	local min, max = UnitPower(unit, pType), UnitPowerMax(unit, pType)
 	local deficit = max - min
@@ -451,8 +448,8 @@ ElvUF.Tags["power:current:hidedead"] = function(unit)
 	return String
 end
 
-ElvUF.TagEvents["power:current-percent:hidedead"] = "UNIT_DISPLAYPOWER UNIT_POWER_FREQUENT UNIT_MAXPOWER UNIT_HEALTH"
-ElvUF.Tags["power:current-percent:hidedead"] = function(unit)
+ElvUF.Tags.Events["power:current-percent:hidedead"] = "UNIT_DISPLAYPOWER UNIT_POWER_FREQUENT UNIT_MAXPOWER UNIT_HEALTH"
+ElvUF.Tags.Methods["power:current-percent:hidedead"] = function(unit)
 	local pType = UnitPowerType(unit)
 	local min, max = UnitPower(unit, pType), UnitPowerMax(unit, pType)
 	local deficit = max - min
@@ -467,8 +464,8 @@ ElvUF.Tags["power:current-percent:hidedead"] = function(unit)
 	return String
 end
 
-ElvUF.TagEvents["power:percent:hidefull:hidedead"] = "UNIT_DISPLAYPOWER UNIT_POWER_FREQUENT UNIT_MAXPOWER UNIT_HEALTH"
-ElvUF.Tags["power:percent:hidefull:hidedead"] = function(unit)
+ElvUF.Tags.Events["power:percent:hidefull:hidedead"] = "UNIT_DISPLAYPOWER UNIT_POWER_FREQUENT UNIT_MAXPOWER UNIT_HEALTH"
+ElvUF.Tags.Methods["power:percent:hidefull:hidedead"] = function(unit)
 	local pType = UnitPowerType(unit)
 	local min, max = UnitPower(unit, pType), UnitPowerMax(unit, pType)
 	local deficit = max - min
@@ -483,8 +480,8 @@ ElvUF.Tags["power:percent:hidefull:hidedead"] = function(unit)
 	return String
 end
 
-ElvUF.TagEvents["power:current:hidefull:hidedead"] = "UNIT_DISPLAYPOWER UNIT_POWER_FREQUENT UNIT_MAXPOWER UNIT_HEALTH"
-ElvUF.Tags["power:current:hidefull:hidedead"] = function(unit)
+ElvUF.Tags.Events["power:current:hidefull:hidedead"] = "UNIT_DISPLAYPOWER UNIT_POWER_FREQUENT UNIT_MAXPOWER UNIT_HEALTH"
+ElvUF.Tags.Methods["power:current:hidefull:hidedead"] = function(unit)
 	local pType = UnitPowerType(unit)
 	local min, max = UnitPower(unit, pType), UnitPowerMax(unit, pType)
 	local deficit = max - min
@@ -499,8 +496,8 @@ ElvUF.Tags["power:current:hidefull:hidedead"] = function(unit)
 	return String
 end
 
-ElvUF.TagEvents["power:current-percent:hidefull:hidedead"] = "UNIT_DISPLAYPOWER UNIT_POWER_FREQUENT UNIT_MAXPOWER UNIT_HEALTH"
-ElvUF.Tags["power:current-percent:hidefull:hidedead"] = function(unit)
+ElvUF.Tags.Events["power:current-percent:hidefull:hidedead"] = "UNIT_DISPLAYPOWER UNIT_POWER_FREQUENT UNIT_MAXPOWER UNIT_HEALTH"
+ElvUF.Tags.Methods["power:current-percent:hidefull:hidedead"] = function(unit)
 	local pType = UnitPowerType(unit)
 	local min, max = UnitPower(unit, pType), UnitPowerMax(unit, pType)
 	local deficit = max - min
@@ -515,8 +512,8 @@ ElvUF.Tags["power:current-percent:hidefull:hidedead"] = function(unit)
 	return String
 end
 
-ElvUF.TagEvents["deficit:name:colors"] = "UNIT_HEALTH UNIT_MAXHEALTH UNIT_NAME_UPDATE"
-ElvUF.Tags["deficit:name:colors"] = function(unit)
+ElvUF.Tags.Events["deficit:name:colors"] = "UNIT_HEALTH UNIT_MAXHEALTH UNIT_NAME_UPDATE"
+ElvUF.Tags.Methods["deficit:name:colors"] = function(unit)
 	local missinghp = _TAGS['missinghp'](unit)
 	local String
 	
@@ -532,7 +529,7 @@ ElvUF.Tags["deficit:name:colors"] = function(unit)
 	return String
 end
 
-ElvUF.Tags["classcolor:player"] = function()
+ElvUF.Tags.Methods["classcolor:player"] = function()
 	local _, unitClass = UnitClass("player")
 	local String
 
@@ -545,42 +542,42 @@ ElvUF.Tags["classcolor:player"] = function()
 	return String
 end
 
-ElvUF.Tags["classcolor:hunter"] = function()
+ElvUF.Tags.Methods["classcolor:hunter"] = function()
 	return Hex(_COLORS.class["HUNTER"])
 end
 
-ElvUF.Tags["classcolor:warrior"] = function()
+ElvUF.Tags.Methods["classcolor:warrior"] = function()
 	return Hex(_COLORS.class["WARRIOR"])
 end
 
-ElvUF.Tags["classcolor:paladin"] = function()
+ElvUF.Tags.Methods["classcolor:paladin"] = function()
 	return Hex(_COLORS.class["PALADIN"])
 end
 
-ElvUF.Tags["classcolor:mage"] = function()
+ElvUF.Tags.Methods["classcolor:mage"] = function()
 	return Hex(_COLORS.class["MAGE"])
 end
 
-ElvUF.Tags["classcolor:priest"] = function()
+ElvUF.Tags.Methods["classcolor:priest"] = function()
 	return Hex(_COLORS.class["PRIEST"])
 end
 
-ElvUF.Tags["classcolor:warlock"] = function()
+ElvUF.Tags.Methods["classcolor:warlock"] = function()
 	return Hex(_COLORS.class["WARLOCK"])
 end
 
-ElvUF.Tags["classcolor:shaman"] = function()
+ElvUF.Tags.Methods["classcolor:shaman"] = function()
 	return Hex(_COLORS.class["SHAMAN"])
 end
 
-ElvUF.Tags["classcolor:deathknight"] = function()
+ElvUF.Tags.Methods["classcolor:deathknight"] = function()
 	return Hex(_COLORS.class["DEATHKNIGHT"])
 end
 
-ElvUF.Tags["classcolor:druid"] = function()
+ElvUF.Tags.Methods["classcolor:druid"] = function()
 	return Hex(_COLORS.class["DRUID"])
 end
 
-ElvUF.Tags["classcolor:rogue"] = function()
+ElvUF.Tags.Methods["classcolor:rogue"] = function()
 	return Hex(_COLORS.class["ROGUE"])
 end
