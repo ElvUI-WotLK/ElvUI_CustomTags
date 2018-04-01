@@ -12,20 +12,22 @@ local _G = _G
 local unpack, pairs, assert = unpack, pairs, assert
 local twipe = table.wipe
 local ceil, sqrt, floor, abs = math.ceil, math.sqrt, math.floor, math.abs
-local format = string.format
+local format, strupper, len, utf8sub = string.format, strupper, string.len, string.utf8sub
 --WoW API
+local GetNumGroupMembers = GetNumGroupMembers
 local IsInGroup = IsInGroup
 local IsInRaid = IsInRaid
-local UnitIsUnit = UnitIsUnit
-local UnitIsGhost = UnitIsGhost
-local UnitIsDead = UnitIsDead
-local GetNumGroupMembers = GetNumGroupMembers
+local UnitClass = UnitClass
+local UnitFactionGroup = UnitFactionGroup
 local UnitHealth = UnitHealth
 local UnitHealthMax = UnitHealthMax
-local UnitPowerType = UnitPowerType
+local UnitIsDead = UnitIsDead
+local UnitIsGhost = UnitIsGhost
+local UnitIsUnit = UnitIsUnit
+local UnitName = UnitName
 local UnitPower = UnitPower
 local UnitPowerMax = UnitPowerMax
-local UnitClass = UnitClass
+local UnitPowerType = UnitPowerType
 
 --GLOBALS: _TAGS, Hex, _COLORS
 
@@ -514,19 +516,94 @@ end
 
 ElvUF.Tags.Events["deficit:name:colors"] = "UNIT_HEALTH UNIT_MAXHEALTH UNIT_NAME_UPDATE"
 ElvUF.Tags.Methods["deficit:name:colors"] = function(unit)
-	local missinghp = _TAGS['missinghp'](unit)
+	local missinghp = _TAGS["missinghp"](unit)
 	local String
 	
 	if missinghp then
-		local healthcolor = _TAGS['healthcolor'](unit)
+		local healthcolor = _TAGS["healthcolor"](unit)
 		String = format("%s-%s|r", healthcolor, missinghp)
 	else
-		local name = _TAGS['name'](unit)
-		local namecolor = _TAGS['namecolor'](unit)
+		local name = _TAGS["name"](unit)
+		local namecolor = _TAGS["namecolor"](unit)
 		String = format("%s%s|r", namecolor, name)
 	end
 	
 	return String
+end
+
+ElvUF.Tags.Events["name:caps"] = "UNIT_NAME_UPDATE"
+ElvUF.Tags.Methods["name:caps"] = function(unit)
+    local name = UnitName(unit)
+    return name ~= nil and strupper(name) or ""
+end
+
+ElvUF.Tags.Events["name:abbreviate"] = "UNIT_NAME_UPDATE"
+ElvUF.Tags.Methods["name:abbreviate"] = function(unit)
+	local name = UnitName(unit)
+
+	if name then
+		name = name:gsub("(%S+) ", function(t) return utf8sub(t,1,1)..". " end)
+	end
+
+	return name
+end
+
+ElvUF.Tags.Events["name:veryshort:abbreviate"] = "UNIT_NAME_UPDATE"
+ElvUF.Tags.Methods["name:veryshort:abbreviate"] = function(unit)
+	local name = UnitName(unit)
+
+	if name and len(name) > 5 then
+		name = name:gsub("(%S+) ", function(t) return utf8sub(t,1,1)..". " end)
+	end
+
+	return name
+end
+
+ElvUF.Tags.Events["name:short:abbreviate"] = "UNIT_NAME_UPDATE"
+ElvUF.Tags.Methods["name:short:abbreviate"] = function(unit)
+	local name = UnitName(unit)
+
+	if name and len(name) > 10 then
+		name = name:gsub("(%S+) ", function(t) return utf8sub(t,1,1)..". " end)
+	end
+
+	return name
+end
+
+ElvUF.Tags.Events["name:medium:abbreviate"] = "UNIT_NAME_UPDATE"
+ElvUF.Tags.Methods["name:medium:abbreviate"] = function(unit)
+	local name = UnitName(unit)
+
+	if name and len(name) > 15 then
+		name = name:gsub("(%S+) ", function(t) return utf8sub(t,1,1)..". " end)
+	end
+
+	return name
+end
+
+ElvUF.Tags.Events["name:long:abbreviate"] = "UNIT_NAME_UPDATE"
+ElvUF.Tags.Methods["name:long:abbreviate"] = function(unit)
+	local name = UnitName(unit)
+
+	if name and len(name) > 20 then
+		name = name:gsub("(%S+) ", function(t) return utf8sub(t,1,1)..". " end)
+	end
+
+	return name
+end
+
+ElvUF.Tags.Events["faction:icon"] = "UNIT_NAME_UPDATE"
+ElvUF.Tags.Methods["faction:icon"] = function(unit)
+	local faction = UnitFactionGroup(unit)
+	local str = ""
+	
+	if faction == "Alliance" then
+		str = "|TInterface\\AddOns\\ElvUI_CustomTags\\Media\\Alliance:0:0:0:-1|t"
+	elseif faction == "Horde" then
+		str = "|TInterface\\AddOns\\ElvUI_CustomTags\\Media\\Horde:0:0:0:-1|t"
+	end
+	
+	return str
 end
 
 ElvUF.Tags.Methods["classcolor:player"] = function()
